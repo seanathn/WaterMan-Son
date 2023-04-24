@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import com.example.waterman_son.databinding.FragmentLogInSonBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -22,6 +23,11 @@ class LogInSonFragment : Fragment() {
         _binding = FragmentLogInSonBinding.inflate(inflater, container,false)
 
         dbRef = Firebase.database.reference
+
+        b.movinAndGroovin.setOnClickListener {
+            val action = LogInSonFragmentDirections.actionLogInSonFragmentToWatermanSonMainFragment()
+            b.root.findNavController().navigate(action)
+        }
 
         return b.root
     }

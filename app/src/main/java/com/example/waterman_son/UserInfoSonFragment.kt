@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.waterman_son.databinding.FragmentUserInfoSonBinding
 
 class UserInfoSonFragment : Fragment() {
@@ -20,7 +22,10 @@ class UserInfoSonFragment : Fragment() {
     ): View? {
         _binding = FragmentUserInfoSonBinding.inflate(inflater, container, false)
 
-
+        b.moveOnSon.setOnClickListener {
+            viewModel.addItemSon(WaterCupSon(b.userData.text.toString(), b.userNumber.text.toString().toDouble(), b.userTime.text.toString()))
+            b.root.findNavController().navigateUp()
+        }
 
         return b.root
     }
