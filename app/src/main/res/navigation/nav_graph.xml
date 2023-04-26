@@ -12,11 +12,11 @@
         tools:layout="@layout/fragment_log_in_son" >
         <action
             android:id="@+id/action_logInSonFragment_to_watermanSonMainFragment"
-            app:destination="@id/watermanSonMainFragment" />
+            app:destination="@id/waterManSonMainFragment" />
     </fragment>
     <fragment
-        android:id="@+id/watermanSonMainFragment"
-        android:name="com.example.waterman_son.WatermanSonMainFragment"
+        android:id="@+id/waterManSonMainFragment"
+        android:name="com.example.waterman_son.WaterManSonMainFragment"
         android:label="fragment_waterman_son"
         tools:layout="@layout/fragment_waterman_son" >
         <action

@@ -15,6 +15,9 @@ class WaterManSonViewModel: ViewModel() {
     private var _currentIndex = 0
     val currentIndex: Int
         get() = _currentIndex
+    private var _takenInUser = false
+    val takenInUser: Boolean
+        get() = _takenInUser
 
     fun setWaterTotalSon() {
         for (x in _waterInfo.value ?: listOf(WaterCupSon("", 0.0, ""))){
@@ -25,6 +28,7 @@ class WaterManSonViewModel: ViewModel() {
     fun addItemSon(newWaterCupSon: WaterCupSon) {
         _waterInfo.value?.add(newWaterCupSon)
         _currentIndex++
+        _takenInUser = true
     }
 
     fun reset() {
