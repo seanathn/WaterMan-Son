@@ -26,9 +26,23 @@ class WaterManSonMainFragment : Fragment() {
             val action = WaterManSonMainFragmentDirections.actionWatermanSonMainFragmentToUserInfoSonFragment()
             b.root.findNavController().navigate(action)
         }
-        if (viewModel.takenInUser){
-            val adapter = WaterCupSonAdapter(viewModel.waterInfo.value!!)
-            b.son.adapter = adapter
+
+        b.clearSon.setOnClickListener {
+            viewModel.reset()
+        }
+
+        viewModel.waterInfo.observe(viewLifecycleOwner) {
+            if (viewModel.takenInUser){
+                val adapter = WaterCupSonAdapter(viewModel.waterInfo.value!!)
+                b.son.adapter = adapter
+            }
+            else {
+                viewModel.reset()
+            }
+        }
+
+        viewModel.waterTotal.observe(viewLifecycleOwner) {
+
         }
 
         return b.root

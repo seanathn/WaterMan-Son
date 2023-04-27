@@ -8,9 +8,7 @@ import com.example.waterman_son.databinding.ListItemLayoutBinding
 class WaterCupSonAdapter(val waterCupList: MutableList<WaterCupSon>) : RecyclerView.Adapter<WaterManSonViewHolder>() {
     override fun onBindViewHolder(holder: WaterManSonViewHolder, position: Int) {
         val currentWaterInfo = waterCupList[position]
-        if (currentWaterInfo.waterAmount != 0.0 && currentWaterInfo.date != "" && currentWaterInfo.time != ""){
-            holder.bindWaterInfo(currentWaterInfo)
-        }
+        holder.bindWaterInfo(currentWaterInfo)
     }
 
     override fun getItemCount(): Int {
