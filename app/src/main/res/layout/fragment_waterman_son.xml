@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WaterManSonMainFragment">
+    tools:context=".WaterManSonMainFragment"
+    android:background="#87ABE1"
+    >
 
     <Button
         android:id="@+id/new_water_info_son"
@@ -29,14 +31,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/new_water_info_son"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/son"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="20dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

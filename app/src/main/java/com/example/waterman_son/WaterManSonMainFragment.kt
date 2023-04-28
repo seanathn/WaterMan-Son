@@ -31,14 +31,9 @@ class WaterManSonMainFragment : Fragment() {
             viewModel.reset()
         }
 
-        viewModel.waterInfo.observe(viewLifecycleOwner) {
-            if (viewModel.takenInUser){
-                val adapter = WaterCupSonAdapter(viewModel.waterInfo.value!!)
-                b.son.adapter = adapter
-            }
-            else {
-                viewModel.reset()
-            }
+        viewModel.waterInfo.observe(viewLifecycleOwner) { waterList ->
+            val adapter = WaterCupSonAdapter(waterList)
+            b.son.adapter = adapter
         }
 
         viewModel.waterTotal.observe(viewLifecycleOwner) {
