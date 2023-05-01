@@ -34,10 +34,11 @@ class WaterManSonMainFragment : Fragment() {
         viewModel.waterInfo.observe(viewLifecycleOwner) { waterList ->
             val adapter = WaterCupSonAdapter(waterList)
             b.son.adapter = adapter
+            viewModel.setWaterTotalSon()
         }
 
         viewModel.waterTotal.observe(viewLifecycleOwner) {
-
+            b.totalAmountText.text = viewModel.waterTotal.value?.toString() ?: "0.0"
         }
 
         return b.root
