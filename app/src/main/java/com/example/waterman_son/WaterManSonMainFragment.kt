@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.waterman_son.databinding.FragmentWatermanSonBinding
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 
 class WaterManSonMainFragment : Fragment() {
     private var _binding : FragmentWatermanSonBinding? = null
     private val b get() = _binding!!
     private val viewModel: WaterManSonViewModel by activityViewModels()
+    lateinit var dbRef : DatabaseReference
 
 
     override fun onCreateView(
@@ -21,6 +25,8 @@ class WaterManSonMainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentWatermanSonBinding.inflate(inflater, container, false)
+
+        dbRef = Firebase.database.reference
 
         b.newWaterInfoSon.setOnClickListener {
             val action = WaterManSonMainFragmentDirections.actionWatermanSonMainFragmentToUserInfoSonFragment()

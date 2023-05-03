@@ -27,6 +27,8 @@ class LogInSonFragment : Fragment() {
         b.movinAndGroovin.setOnClickListener {
             val action = LogInSonFragmentDirections.actionLogInSonFragmentToWatermanSonMainFragment()
             b.root.findNavController().navigate(action)
+            dbRef.child("username").push().setValue(b.userName.text.toString())
+            dbRef.child("password").push().setValue(b.userPassword.text.toString())
         }
 
         return b.root
