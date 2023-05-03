@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import java.util.stream.IntStream.range
 
 class WaterManSonViewModel: ViewModel() {
-    private val testCaseCup = WaterCupSon("test", 0.0, "test")
+    private val testCaseCup = WaterCupSon("Date", 0.0, "Time")
 
     private val _waterInfo = MutableLiveData(mutableListOf(testCaseCup))
     val waterInfo: LiveData<MutableList<WaterCupSon>>
@@ -17,12 +17,13 @@ class WaterManSonViewModel: ViewModel() {
 
     fun setWaterTotalSon() {
         for (x in _waterInfo.value ?: listOf(testCaseCup)){
-            _waterTotal.value = x.waterAmount
+            _waterTotal.value = _waterTotal.value?.plus(x.waterAmount)
         }
     }
 
     fun addItemSon(newWaterCupSon: WaterCupSon) {
         _waterInfo.value?.add(newWaterCupSon)
+        _waterTotal.value = 0.0
     }
 
     fun reset() {

@@ -30,10 +30,10 @@
         android:id="@+id/amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Amount"
+        android:text="Amount (ounces)"
         app:layout_constraintBaseline_toBaselineOf="@+id/user_number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.26"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -43,7 +43,6 @@
         android:ems="10"
         android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/user_time"
-        app:layout_constraintEnd_toEndOf="@+id/user_time"
         app:layout_constraintStart_toEndOf="@+id/date"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,11 +61,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/user_time"
         app:layout_constraintStart_toEndOf="@+id/amount"
-        app:layout_constraintTop_toBottomOf="@+id/user_time" />
+        app:layout_constraintTop_toBottomOf="@+id/user_time"
+        android:inputType="numberDecimal" />
 
     <Button
         android:id="@+id/move_on_son"
@@ -77,5 +75,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_number" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
