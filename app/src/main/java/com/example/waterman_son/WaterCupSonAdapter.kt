@@ -8,8 +8,8 @@ import com.example.waterman_son.databinding.ListItemLayoutBinding
 class WaterCupSonAdapter(val waterCupList: MutableList<WaterCupSon>) : RecyclerView.Adapter<WaterManSonViewHolder>() {
     override fun onBindViewHolder(holder: WaterManSonViewHolder, position: Int) {
         val currentWaterInfo = waterCupList[position]
-        if (waterCupList.contains(WaterCupSon("test", 0.0, "test"))) {
-            waterCupList.remove(WaterCupSon("test", 0.0, "test"))
+        if (waterCupList.contains(WaterCupSon("Date", 0.0, "Time"))) {
+            waterCupList.remove(WaterCupSon("Date", 0.0, "Time"))
         }
         holder.bindWaterInfo(currentWaterInfo)
     }

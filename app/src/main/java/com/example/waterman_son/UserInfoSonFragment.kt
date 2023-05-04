@@ -31,7 +31,7 @@ class UserInfoSonFragment : Fragment() {
         b.moveOnSon.setOnClickListener {
             val userInfo = WaterCupSon(b.userData.text.toString(), b.userNumber.text.toString().toDouble(), b.userTime.text.toString())
             viewModel.addItemSon(userInfo)
-            dbRef.child("waterList").push().setValue(userInfo)
+            dbRef.child("waterList").push().setValue(viewModel.waterInfo)
             b.root.findNavController().navigateUp()
         }
 
