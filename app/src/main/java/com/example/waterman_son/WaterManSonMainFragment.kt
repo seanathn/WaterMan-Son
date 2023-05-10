@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.waterman_son.databinding.FragmentWatermanSonBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -18,7 +19,17 @@ class WaterManSonMainFragment : Fragment() {
     private val b get() = _binding!!
     private val viewModel: WaterManSonViewModel by activityViewModels()
     lateinit var dbRef : DatabaseReference
+    lateinit var auth : FirebaseAuth
 
+    override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            var userListOfWater = mutableListOf<WaterCupSon>()
+            viewModel.setWaterInfoWithSignin(userListOfWater)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +38,7 @@ class WaterManSonMainFragment : Fragment() {
         _binding = FragmentWatermanSonBinding.inflate(inflater, container, false)
 
         dbRef = Firebase.database.reference
+        auth = FirebaseAuth.getInstance()
 
         b.newWaterInfoSon.setOnClickListener {
             val action = WaterManSonMainFragmentDirections.actionWatermanSonMainFragmentToUserInfoSonFragment()

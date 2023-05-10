@@ -30,4 +30,8 @@ class WaterManSonViewModel: ViewModel() {
         _waterInfo.value = mutableListOf(testCaseCup)
         _waterTotal.value = 0.0
     }
+
+    fun setWaterInfoWithSignin(userEmailInfo: MutableList<WaterCupSon>) {
+        _waterInfo.value = userEmailInfo
+    }
 }

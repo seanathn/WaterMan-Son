@@ -9,7 +9,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.waterman_son.databinding.FragmentUserInfoSonBinding
+import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -31,7 +33,9 @@ class UserInfoSonFragment : Fragment() {
         b.moveOnSon.setOnClickListener {
             val userInfo = WaterCupSon(b.userData.text.toString(), b.userNumber.text.toString().toDouble(), b.userTime.text.toString())
             viewModel.addItemSon(userInfo)
-            dbRef.child("waterList").push().setValue(viewModel.waterInfo)
+            dbRef.child("waterList").child("water").child("date").push().setValue(b.userData.text.toString())
+            dbRef.child("waterList").child("water").child("time").push().setValue(b.userTime.text.toString())
+            dbRef.child("waterList").child("water").child("amount").push().setValue(b.userNumber.text.toString().toDouble())
             b.root.findNavController().navigateUp()
         }
 

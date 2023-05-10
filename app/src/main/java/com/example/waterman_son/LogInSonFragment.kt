@@ -1,6 +1,5 @@
 package com.example.waterman_son
 
-import android.app.appsearch.AppSearchResult.RESULT_OK
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +12,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.navigation.findNavController
 import com.example.waterman_son.databinding.FragmentLogInSonBinding
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -25,14 +25,7 @@ class LogInSonFragment : Fragment() {
     lateinit var dbRef : DatabaseReference
     private lateinit var auth: FirebaseAuth
 
-    public override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-//            reload()
-        }
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +38,7 @@ class LogInSonFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         b.movinAndGroovin.setOnClickListener {
-            createAccount(b.userName.text.toString(), b.userPassword.text.toString())
+            signIn(b.userName.text.toString(), b.userPassword.text.toString())
         }
 
         return b.root
@@ -84,15 +77,18 @@ class LogInSonFragment : Fragment() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
                     val user = auth.currentUser
+                    val action = LogInSonFragmentDirections.actionLogInSonFragmentToWatermanSonMainFragment()
+                    b.root.findNavController().navigate(action)
 //                    updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        context,
-                        "Authentication failed.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                    MaterialAlertDialogBuilder(requireContext()).setTitle("The information does not exist yet. Would you like to add it?")
+                        .setMessage("If the email is being used double check your password").setPositiveButton("Yes"){ dialog, which ->
+                            createAccount(email, password)
+                        }.setNegativeButton("No"){dialog, which ->
+
+                        }.show()
 //                    updateUI(null)
                 }
             }
