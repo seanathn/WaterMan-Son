@@ -49,7 +49,7 @@ class LogInSonFragment : Fragment() {
         // Check if user is signed in
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            viewModel.setWaterInfoWithSignin()
+            viewModel.setWaterInfoWithSignIn()
             val action = LogInSonFragmentDirections.actionLogInSonFragmentToWatermanSonMainFragment()
             b.root.findNavController().navigate(action)
         }
