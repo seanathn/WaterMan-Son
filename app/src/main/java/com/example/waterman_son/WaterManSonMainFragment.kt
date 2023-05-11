@@ -18,17 +18,7 @@ class WaterManSonMainFragment : Fragment() {
     private var _binding : FragmentWatermanSonBinding? = null
     private val b get() = _binding!!
     private val viewModel: WaterManSonViewModel by activityViewModels()
-    lateinit var dbRef : DatabaseReference
-    lateinit var auth : FirebaseAuth
 
-    override fun onStart() {
-        super.onStart()
-        // Check if user is signed in
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            var userListOfWater = dbRef.child("users").child(currentUser.uid).get().result.value
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,8 +26,6 @@ class WaterManSonMainFragment : Fragment() {
     ): View? {
         _binding = FragmentWatermanSonBinding.inflate(inflater, container, false)
 
-        dbRef = Firebase.database.reference
-        auth = FirebaseAuth.getInstance()
 
         b.newWaterInfoSon.setOnClickListener {
             val action = WaterManSonMainFragmentDirections.actionWatermanSonMainFragmentToUserInfoSonFragment()

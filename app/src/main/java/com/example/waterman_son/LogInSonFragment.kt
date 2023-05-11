@@ -44,6 +44,17 @@ class LogInSonFragment : Fragment() {
         return b.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        // Check if user is signed in
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            viewModel.setWaterInfoWithSignin()
+            val action = LogInSonFragmentDirections.actionLogInSonFragmentToWatermanSonMainFragment()
+            b.root.findNavController().navigate(action)
+        }
+    }
+
     private fun createAccount(email: String, password: String) {
         // [START create_user_with_email]
         auth.createUserWithEmailAndPassword(email, password)
