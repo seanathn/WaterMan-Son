@@ -31,7 +31,7 @@ class WaterManSonViewModel: ViewModel() {
         _waterTotal.value = 0.0
     }
 
-    fun setWaterInfoWithSignin(userEmailInfo: MutableList<WaterCupSon>) {
-        _waterInfo.value = userEmailInfo
+    fun setWaterInfoWithSignin(userEmailInfo: String) {
+
     }
 }

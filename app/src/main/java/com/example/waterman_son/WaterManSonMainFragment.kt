@@ -23,11 +23,10 @@ class WaterManSonMainFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
+        // Check if user is signed in
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            var userListOfWater = mutableListOf<WaterCupSon>()
-            viewModel.setWaterInfoWithSignin(userListOfWater)
+            var userListOfWater = dbRef.child("users").child(currentUser.uid).get().result.value
         }
     }
 

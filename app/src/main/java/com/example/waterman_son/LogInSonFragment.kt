@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.waterman_son.databinding.FragmentLogInSonBinding
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -24,8 +25,7 @@ class LogInSonFragment : Fragment() {
     private val b get() = _binding!!
     lateinit var dbRef : DatabaseReference
     private lateinit var auth: FirebaseAuth
-
-
+    private val viewModel: WaterManSonViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +52,7 @@ class LogInSonFragment : Fragment() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
-//                    updateUI(user)
+                    Firebase.database.getReference("users/" + user!!.uid + "/waterList").setValue(viewModel.waterInfo)
                     val action = LogInSonFragmentDirections.actionLogInSonFragmentToWatermanSonMainFragment()
                     b.root.findNavController().navigate(action)
                 } else {
@@ -77,6 +77,7 @@ class LogInSonFragment : Fragment() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
                     val user = auth.currentUser
+                    Firebase.database.getReference("users/" + user!!.uid + "/waterList").setValue(viewModel.waterInfo)
                     val action = LogInSonFragmentDirections.actionLogInSonFragmentToWatermanSonMainFragment()
                     b.root.findNavController().navigate(action)
 //                    updateUI(user)
