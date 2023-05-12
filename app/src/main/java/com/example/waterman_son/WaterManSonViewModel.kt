@@ -22,6 +22,8 @@ class WaterManSonViewModel: ViewModel() {
     val waterTotal: LiveData<Double>
         get() = _waterTotal
 
+    private var tempList = mutableListOf<WaterCupSon>()
+
     fun setWaterTotalSon() {
         for (x in _waterInfo.value ?: listOf(testCaseCup)){
             _waterTotal.value = _waterTotal.value?.plus(x.waterAmount)
@@ -35,28 +37,25 @@ class WaterManSonViewModel: ViewModel() {
     fun reset() {
         _waterInfo.value = mutableListOf(testCaseCup)
         _waterTotal.value = 0.0
+        Firebase.database.reference.child("users").child(FirebaseAuth.getInstance().uid.toString())
+            .child("waterList").setValue(_waterInfo)
     }
 
     fun setWaterInfoWithSignIn() {
         Firebase.database.reference.addValueEventListener(object: ValueEventListener  {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val allDBEntries = dataSnapshot.children
+                val userWaterInfo = dataSnapshot.child("users").child(FirebaseAuth.getInstance().uid.toString()).child("waterList").child("value").children
 
-                var numOfWaterCupSons = 0
-                for (allUsers in allDBEntries) {
-                    for (singleUser in allUsers.children) {
-                        for (singleWaterEntry in singleUser.children) {
-                            numOfWaterCupSons++
-                            val time = singleWaterEntry.child("time").getValue().toString()
-                            val date = singleWaterEntry.child("date").getValue().toString()
-                            val amountString =
-                                singleWaterEntry.child("waterAmount").getValue().toString()
-                            val amount = amountString.toDouble()
-                            val currentWaterUserInfo = WaterCupSon(date, amount, time)
-                            _waterInfo.value?.add(currentWaterUserInfo)
-                        }
-                    }
+                for (fireBaseInfo in userWaterInfo) {
+                    val time = fireBaseInfo.child("time").getValue().toString()
+                    val date = fireBaseInfo.child("date").getValue().toString()
+                    val amountString = fireBaseInfo.child("waterAmount").getValue().toString()
+                    val amount = amountString.toDouble()
+                    val currentWaterUserInfo = WaterCupSon(date, amount, time)
+                    tempList.add(currentWaterUserInfo)
                 }
+                _waterInfo.value = tempList
+                tempList = mutableListOf<WaterCupSon>()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -64,16 +63,5 @@ class WaterManSonViewModel: ViewModel() {
             }
         })
 
-//        val allDBEntries = Firebase.database.reference.child("users").child(FirebaseAuth.getInstance()
-//            .uid.toString()).child("waterList").child("value").get().result.children
-//        for (allWaterEntries in allDBEntries) {
-//            for (singleWaterEntry in allWaterEntries.children) {
-//                val time = singleWaterEntry.child("time").getValue().toString()
-//                val date = singleWaterEntry.child("date").getValue().toString()
-//                val amount = singleWaterEntry.child("amount").getValue().toString()
-//                val currentWaterUserInfo = WaterCupSon(date, amount.toDouble(), time)
-//                _waterInfo.value?.add(currentWaterUserInfo)
-//            }
-//        }
     }
 }
