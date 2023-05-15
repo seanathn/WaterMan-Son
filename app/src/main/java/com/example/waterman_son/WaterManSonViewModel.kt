@@ -25,13 +25,16 @@ class WaterManSonViewModel: ViewModel() {
     private var tempList = mutableListOf<WaterCupSon>()
 
     fun setWaterTotalSon() {
+        var currentWaterAmount = 0.0
         for (x in _waterInfo.value ?: listOf(testCaseCup)){
-            _waterTotal.value = _waterTotal.value?.plus(x.waterAmount)
+            currentWaterAmount = currentWaterAmount.plus(x.waterAmount)
         }
+        _waterTotal.value = currentWaterAmount
     }
 
     fun addItemSon(newWaterCupSon: WaterCupSon) {
         _waterInfo.value?.add(newWaterCupSon)
+        _waterTotal.value = 0.0
     }
 
     fun reset() {
@@ -44,7 +47,9 @@ class WaterManSonViewModel: ViewModel() {
     fun setWaterInfoWithSignIn() {
         Firebase.database.reference.addValueEventListener(object: ValueEventListener  {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val userWaterInfo = dataSnapshot.child("users").child(FirebaseAuth.getInstance().uid.toString()).child("waterList").child("value").children
+                val userWaterInfo = dataSnapshot.child("users")
+                    .child(FirebaseAuth.getInstance().uid.toString())
+                    .child("waterList").child("value").children
 
                 for (fireBaseInfo in userWaterInfo) {
                     val time = fireBaseInfo.child("time").getValue().toString()
@@ -62,6 +67,5 @@ class WaterManSonViewModel: ViewModel() {
                 Log.w("WaterCupSon", "Failed to read value.", error.toException())
             }
         })
-
     }
 }

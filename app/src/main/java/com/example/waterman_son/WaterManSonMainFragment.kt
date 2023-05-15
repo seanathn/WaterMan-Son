@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.waterman_son.databinding.FragmentWatermanSonBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -33,7 +34,11 @@ class WaterManSonMainFragment : Fragment() {
         }
 
         b.clearSon.setOnClickListener {
-            viewModel.reset()
+            MaterialAlertDialogBuilder(requireContext()).setTitle("Are you sure you want to reset?")
+                .setMessage("The information will be lost").setPositiveButton("Yes"){ dialog, which ->
+                    viewModel.reset()
+                }.setNegativeButton("No"){dialog, which ->
+                }.show()
         }
 
         viewModel.waterInfo.observe(viewLifecycleOwner) { waterList ->

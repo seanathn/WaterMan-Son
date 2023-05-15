@@ -8,13 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.waterman_son.databinding.FragmentLogInSonBinding
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -39,6 +35,10 @@ class LogInSonFragment : Fragment() {
 
         b.movinAndGroovin.setOnClickListener {
             signIn(b.userName.text.toString(), b.userPassword.text.toString())
+        }
+
+        b.button.setOnClickListener {
+            createAccount(b.userName.text.toString(), b.userPassword.text.toString())
         }
 
         return b.root
@@ -95,12 +95,11 @@ class LogInSonFragment : Fragment() {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    MaterialAlertDialogBuilder(requireContext()).setTitle("The information does not exist yet. Would you like to add it?")
-                        .setMessage("If the email is being used double check your password").setPositiveButton("Yes"){ dialog, which ->
-                            createAccount(email, password)
-                        }.setNegativeButton("No"){dialog, which ->
-
-                        }.show()
+                    Toast.makeText(
+                        context,
+                        "Authentication failed.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
 //                    updateUI(null)
                 }
             }
