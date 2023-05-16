@@ -1,12 +1,12 @@
 package com.example.waterman_son
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import com.example.waterman_son.databinding.FragmentWatermanSonBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
@@ -50,8 +50,19 @@ class WaterManSonMainFragment : Fragment() {
         viewModel.waterTotal.observe(viewLifecycleOwner) {
             b.totalAmountText.text = viewModel.waterTotal.value?.toString() ?: "0.0"
         }
+        setHasOptionsMenu(true)
 
         return b.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.options_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.
+        onNavDestinationSelected(item, requireView().findNavController()) || super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {
