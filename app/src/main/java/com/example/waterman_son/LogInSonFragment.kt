@@ -87,8 +87,7 @@ class LogInSonFragment : Fragment() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
-                    val user = auth.currentUser
-                    Firebase.database.getReference("users/" + user!!.uid + "/waterList").setValue(viewModel.waterInfo)
+                    viewModel.setWaterInfoWithSignIn()
                     val action = LogInSonFragmentDirections.actionLogInSonFragmentToWatermanSonMainFragment()
                     b.root.findNavController().navigate(action)
 //                    updateUI(user)

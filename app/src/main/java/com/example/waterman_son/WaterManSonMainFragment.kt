@@ -6,13 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import com.example.waterman_son.databinding.FragmentWatermanSonBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 
 
 class WaterManSonMainFragment : Fragment() {
@@ -35,9 +31,9 @@ class WaterManSonMainFragment : Fragment() {
 
         b.clearSon.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext()).setTitle("Are you sure you want to reset?")
-                .setMessage("The information will be lost").setPositiveButton("Yes"){ dialog, which ->
+                .setMessage("The information will be lost").setPositiveButton("Yes"){ _, _ ->
                     viewModel.reset()
-                }.setNegativeButton("No"){dialog, which ->
+                }.setNegativeButton("No"){ _, _ ->
                 }.show()
         }
 
@@ -61,8 +57,14 @@ class WaterManSonMainFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.
-        onNavDestinationSelected(item, requireView().findNavController()) || super.onOptionsItemSelected(item)
+        if (item.title.toString() == "About"){
+            return NavigationUI.onNavDestinationSelected(item, requireView().findNavController()) || super.onOptionsItemSelected(item)
+        }
+        else if (item.title.toString() == "Sign Out"){
+            FirebaseAuth.getInstance().signOut()
+            b.root.findNavController().navigateUp()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {
