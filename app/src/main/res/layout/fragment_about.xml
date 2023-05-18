@@ -13,7 +13,7 @@
         android:id="@+id/calling"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Call 800-426-4791 to make sure your drinking water is clean"
+        android:text="Click to call 800-426-4791 to make sure your drinking water is clean"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
