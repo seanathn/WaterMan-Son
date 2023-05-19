@@ -68,4 +68,8 @@ class WaterManSonViewModel: ViewModel() {
             }
         })
     }
+
+    fun removeItem(item: WaterCupSon) {
+        _waterInfo.value?.removeAt(_waterInfo.value?.indexOf(item)!!)
+    }
 }
