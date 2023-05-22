@@ -27,6 +27,11 @@ class ChangeValueFragment : Fragment() {
 
         val args = ChangeValueFragmentArgs.fromBundle(requireArguments())
         val item = WaterCupSon(args.date, args.amount.toDouble(), args.toString())
+        val index = viewModel.waterInfo.value?.indexOf(item)!!
+
+        b.userData.setText(args.date)
+        b.userNumber.setText(args.amount.toDouble().toString())
+        b.userTime.setText(args.time)
 
         b.removeItem.setOnClickListener {
             viewModel.removeItem(item)
@@ -35,7 +40,7 @@ class ChangeValueFragment : Fragment() {
         }
 
         b.moveOnSon.setOnClickListener {
-
+            viewModel.replaceItem(index, WaterCupSon(b.userData.text.toString(), b.userNumber.text.toString().toDouble(), b.userTime.text.toString()))
         }
 
         return b.root

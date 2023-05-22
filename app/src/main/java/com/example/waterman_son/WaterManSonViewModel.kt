@@ -52,7 +52,7 @@ class WaterManSonViewModel: ViewModel() {
                     .child("waterList").child("value").children
 
                 for (fireBaseInfo in userWaterInfo) {
-                    val time = fireBaseInfo.child("time").getValue().toString()
+                    val time = fireBaseInfo.child("time").value.toString()
                     val date = fireBaseInfo.child("date").getValue().toString()
                     val amountString = fireBaseInfo.child("waterAmount").getValue().toString()
                     val amount = amountString.toDouble()
@@ -71,5 +71,9 @@ class WaterManSonViewModel: ViewModel() {
 
     fun removeItem(item: WaterCupSon) {
         _waterInfo.value?.removeAt(_waterInfo.value?.indexOf(item)!!)
+    }
+
+    fun replaceItem(itemIndex: Int, item: WaterCupSon) {
+        _waterInfo.value?.set(itemIndex,item)
     }
 }
