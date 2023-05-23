@@ -11,6 +11,7 @@ import com.example.waterman_son.databinding.FragmentChangeValueBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.math.RoundingMode
 
 
 class ChangeValueFragment : Fragment() {
@@ -26,11 +27,15 @@ class ChangeValueFragment : Fragment() {
         _binding = FragmentChangeValueBinding.inflate(inflater, container, false)
 
         val args = ChangeValueFragmentArgs.fromBundle(requireArguments())
-        val item = WaterCupSon(args.date, args.amount.toDouble(), args.toString())
+        val amount = args.amount.toDouble().toBigDecimal()
+        val decimal = amount.setScale(2, RoundingMode.HALF_EVEN)
+        val item = WaterCupSon(args.date, decimal.toDouble(), args.time.toString())
         val index = viewModel.waterInfo.value?.indexOf(item)!!
 
+        val userNum = "%.2f".format(args.amount.toDouble())
+
         b.userData.setText(args.date)
-        b.userNumber.setText(args.amount.toDouble().toString())
+        b.userNumber.setText(userNum)
         b.userTime.setText(args.time)
 
         b.removeItem.setOnClickListener {
@@ -41,6 +46,8 @@ class ChangeValueFragment : Fragment() {
 
         b.moveOnSon.setOnClickListener {
             viewModel.replaceItem(index, WaterCupSon(b.userData.text.toString(), b.userNumber.text.toString().toDouble(), b.userTime.text.toString()))
+            dbRef.child("users").child(FirebaseAuth.getInstance().uid.toString()).child("waterList").setValue(viewModel.waterInfo)
+            b.root.findNavController().navigateUp()
         }
 
         return b.root
