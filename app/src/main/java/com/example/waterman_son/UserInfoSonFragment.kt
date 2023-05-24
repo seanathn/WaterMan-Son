@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.math.RoundingMode
 
 class UserInfoSonFragment : Fragment() {
     private var _binding: FragmentUserInfoSonBinding? = null
@@ -32,7 +33,9 @@ class UserInfoSonFragment : Fragment() {
         dbRef = Firebase.database.reference
 
         b.moveOnSon.setOnClickListener {
-            val userInfo = WaterCupSon(b.userData.text.toString(), b.userNumber.text.toString().toDouble(), b.userTime.text.toString())
+            val amount = b.userNumber.text.toString().toDouble().toBigDecimal()
+            val decimal = amount.setScale(2, RoundingMode.HALF_EVEN)
+            val userInfo = WaterCupSon(b.userData.text.toString(), decimal.toDouble(), b.userTime.text.toString())
             viewModel.addItemSon(userInfo)
             dbRef.child("users").child(FirebaseAuth.getInstance().uid.toString()).child("waterList").setValue(viewModel.waterInfo)
             b.root.findNavController().navigateUp()

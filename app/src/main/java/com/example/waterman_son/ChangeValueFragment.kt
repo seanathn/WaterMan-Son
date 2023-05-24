@@ -29,7 +29,7 @@ class ChangeValueFragment : Fragment() {
         val args = ChangeValueFragmentArgs.fromBundle(requireArguments())
         val amount = args.amount.toDouble().toBigDecimal()
         val decimal = amount.setScale(2, RoundingMode.HALF_EVEN)
-        val item = WaterCupSon(args.date, decimal.toDouble(), args.time.toString())
+        val item = WaterCupSon(args.date, decimal.toDouble(), args.time)
         val index = viewModel.waterInfo.value?.indexOf(item)!!
 
         val userNum = "%.2f".format(args.amount.toDouble())
@@ -45,7 +45,9 @@ class ChangeValueFragment : Fragment() {
         }
 
         b.moveOnSon.setOnClickListener {
-            viewModel.replaceItem(index, WaterCupSon(b.userData.text.toString(), b.userNumber.text.toString().toDouble(), b.userTime.text.toString()))
+            val currentAmount = b.userNumber.text.toString().toDouble().toBigDecimal()
+            val newNum = currentAmount.setScale(2, RoundingMode.HALF_EVEN)
+            viewModel.replaceItem(index, WaterCupSon(b.userData.text.toString(), newNum.toDouble(), b.userTime.text.toString()))
             dbRef.child("users").child(FirebaseAuth.getInstance().uid.toString()).child("waterList").setValue(viewModel.waterInfo)
             b.root.findNavController().navigateUp()
         }

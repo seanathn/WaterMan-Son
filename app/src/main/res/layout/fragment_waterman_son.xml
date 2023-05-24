@@ -23,6 +23,7 @@
         android:id="@+id/total_amount_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/new_water_info_son"
         app:layout_constraintStart_toEndOf="@+id/clear_son"

@@ -16,8 +16,9 @@ class WaterManSonViewHolder(val b: ListItemLayoutBinding) : RecyclerView.ViewHol
 
     fun bindWaterInfo(waterInfo: WaterCupSon) {
         currentInfo = waterInfo
+        val userNum = "%.2f".format(currentInfo.waterAmount)
         b.dateRecycler.text = currentInfo.date
-        b.amountRecycler.text = currentInfo.waterAmount.toString()
+        b.amountRecycler.text = userNum
         b.timeRecyler.text = currentInfo.time
     }
 }

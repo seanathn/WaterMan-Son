@@ -30,7 +30,9 @@ class WaterManSonViewModel: ViewModel() {
         for (x in _waterInfo.value ?: listOf(testCaseCup)){
             currentWaterAmount = currentWaterAmount.plus(x.waterAmount)
         }
-        _waterTotal.value = currentWaterAmount
+        val amount = currentWaterAmount.toBigDecimal()
+        val decimal = amount.setScale(2, RoundingMode.HALF_EVEN)
+        _waterTotal.value = decimal.toDouble()
     }
 
     fun addItemSon(newWaterCupSon: WaterCupSon) {
