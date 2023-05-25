@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.math.BigDecimal
 import java.math.RoundingMode
 
 class UserInfoSonFragment : Fragment() {
@@ -33,7 +35,15 @@ class UserInfoSonFragment : Fragment() {
         dbRef = Firebase.database.reference
 
         b.moveOnSon.setOnClickListener {
-            val amount = b.userNumber.text.toString().toDouble().toBigDecimal()
+
+            val amount =
+                if (b.userNumber.text.toString() == "") {
+                    BigDecimal(0)
+                }
+                 else  {
+                    b.userNumber.text.toString().toDouble().toBigDecimal()
+                }
+
             val decimal = amount.setScale(2, RoundingMode.HALF_EVEN)
             val userInfo = WaterCupSon(b.userData.text.toString(), decimal.toDouble(), b.userTime.text.toString())
             viewModel.addItemSon(userInfo)
