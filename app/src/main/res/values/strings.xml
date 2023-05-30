@@ -2,4 +2,17 @@
     <string name="app_name">WaterMan-Son</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>\
+    <string name="amount">Amount (ounces)</string>
+    <string name="done">Done</string>
+    <string name="remove">Remove</string>
+    <string name="add">Add New</string>
+    <string name="clear">Clear All</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="welcome">Welcome to WaterMan-Son</string>
+    <string name="intro">Please enter your sign in here:</string>
+    <string name="email_hint">User email</string>
+    <string name="password_hint">Password</string>
 </resources>
