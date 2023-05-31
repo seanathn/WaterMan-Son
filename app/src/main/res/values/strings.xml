@@ -15,4 +15,6 @@
     <string name="intro">Please enter your sign in here:</string>
     <string name="email_hint">User email</string>
     <string name="password_hint">Password</string>
+    <string name="call">Click to call 800-426-4791 to make sure your drinking water is clean</string>
+    <string name="discrip">This app help you track your water intake by displaying your entries and adding up the total amount of water drank by the user.</string>
 </resources>

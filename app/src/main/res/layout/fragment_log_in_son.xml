@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ADC3A4"
     tools:context=".LogInSonFragment">
 
     <Button
@@ -11,6 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_in"
+        app:backgroundTint="#8A38C3"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -21,6 +24,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_up"
+        android:textSize="20sp"
+
+        app:backgroundTint="#586DB6"
         app:layout_constraintBaseline_toBaselineOf="@+id/movin_and_groovin"
         app:layout_constraintEnd_toStartOf="@+id/movin_and_groovin"
         app:layout_constraintHorizontal_bias="0.5"
@@ -30,6 +36,8 @@
         android:id="@+id/welcome_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:textColor="#656565"
         android:text="@string/welcome"
         app:layout_constraintBottom_toTopOf="@+id/instrucitons"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,11 +48,13 @@
         android:id="@+id/instrucitons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#000000"
         android:text="@string/intro"
         app:layout_constraintBottom_toTopOf="@+id/user_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textSize="20sp"
         app:layout_constraintVertical_bias="0.65" />
 
     <EditText
