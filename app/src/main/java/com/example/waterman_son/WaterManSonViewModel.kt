@@ -11,7 +11,11 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.math.RoundingMode
-import java.util.stream.IntStream.range
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class WaterManSonViewModel: ViewModel() {
     private val testCaseCup = WaterCupSon("Date", 0.0, "Time")
@@ -38,6 +42,7 @@ class WaterManSonViewModel: ViewModel() {
     fun addItemSon(newWaterCupSon: WaterCupSon) {
         _waterInfo.value?.add(newWaterCupSon)
         _waterTotal.value = 0.0
+        orderList()
     }
 
     fun reset() {
@@ -78,5 +83,40 @@ class WaterManSonViewModel: ViewModel() {
 
     fun replaceItem(itemIndex: Int, item: WaterCupSon) {
         _waterInfo.value?.set(itemIndex,item)
+    }
+
+    fun orderList() {
+        var yearList = mutableListOf<String>()
+        for (x in _waterInfo.value!!) {
+            yearList.add(x.date)
+        }
+
+
+    }
+
+    fun sort(array: MutableList<String>) {
+//        for (i in 1 until array.size) {
+//            val x = array[i]
+//
+//            // Find location to insert
+//            // using binary search
+//            val j: Int = Math.abs(
+//                Arrays.binarySearch(
+//                    array, 0,
+//                    i, x
+//                ) + 1
+//            )
+//
+//            // Shifting array to one
+//            // location right
+//            System.arraycopy(
+//                array, j,
+//                array, j + 1, i - j
+//            )
+//
+//            // Placing element at its
+//            // correct location
+//            array[j] = x
+//        }
     }
 }
