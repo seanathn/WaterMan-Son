@@ -48,6 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/date_format"
         android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/user_time"
         app:layout_constraintStart_toEndOf="@+id/date"
