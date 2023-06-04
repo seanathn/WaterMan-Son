@@ -38,7 +38,6 @@ class WaterManSonViewModel: ViewModel() {
         _waterTotal.value = decimal.toDouble()
     }
 
-
     fun addItemSon(newWaterCupSon: WaterCupSon) {
         _waterInfo.value?.add(newWaterCupSon)
         _waterTotal.value = 0.0
@@ -88,13 +87,11 @@ class WaterManSonViewModel: ViewModel() {
         orderList()
     }
 
-
-    fun orderList() {
+    private fun orderList() {
         val yearList = mutableListOf<String>()
         for (x in _waterInfo.value!!) {
             yearList.add(x.date)
         }
-
 
         val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
 
@@ -103,11 +100,9 @@ class WaterManSonViewModel: ViewModel() {
         }
 
         sort(result)
-
-
     }
 
-    fun sort(array: List<String>) {
+    private fun sort(array: List<String>) {
         val newDateList = mutableListOf<WaterCupSon>()
         val oldDateList = _waterInfo.value!!
         var i = 0
